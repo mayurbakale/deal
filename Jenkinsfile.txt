@@ -8,21 +8,17 @@ node {
     }
 	
 	stage('Build App') {
-		dir(deal-service) {
-			/* This builds the actual image; synonymous to
-			* docker build on the command line */
+		/* This builds the actual image; synonymous to
+		* docker build on the command line */
 
-			sh 'mvn clean install'
-		}
+		sh 'mvn clean install'
     }
 
     stage('Build image') {
-		dir(deal-service) {
-			/* This builds the actual image; synonymous to
-			* docker build on the command line */
+		/* This builds the actual image; synonymous to
+		* docker build on the command line */
 
-			app = docker.build("deal")
-		}
+		app = docker.build("deal")
     }
 
     stage('Test image') {
