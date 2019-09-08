@@ -1,0 +1,24 @@
+version: '3'
+services:
+  eureka:
+    build: 
+        context: E:\Softwares\GCP\gcpcrudmicroservices
+        dockerfile: Dockerfile
+    image: eureka
+    expose:
+    - "8761"
+    ports:
+    - "8761:8761"
+  deal:
+    build:
+        context: E:\Softwares\GCP\gcpworkspace\deal-service
+        dockerfile: Dockerfile
+    image: deal
+    ports:
+    - "27000:27000"
+    environment:
+      server.port: 27000
+      eureka.client.enabled: 'true'
+      eureka.host: eureka
+      eureka.instance.preferIpAddress: 'false'
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
